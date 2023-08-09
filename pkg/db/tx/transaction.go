@@ -25,13 +25,14 @@ const END_OF_FILE = -1
 
 func NewTransaction(fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) *Transaction {
 	txnum := nextTxNumber()
+	cm := NewConcurrencyMgr()
 	rm := NewRecoveryMgr(nil, txnum, lm, bm)
 	tx := &Transaction{
 		fm:          fm,
 		bm:          bm,
 		txnum:       txnum,
 		recoveryMgr: rm,
-		concurMgr:   &ConcurrencyMgr{},
+		concurMgr:   cm,
 		mybuffers:   NewBufferList(bm),
 	}
 	rm.tx = tx

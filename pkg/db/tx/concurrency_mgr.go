@@ -7,15 +7,14 @@ type ConcurrencyMgr struct {
 	Locks     map[file.BlockId]string
 }
 
-// NewConcurrencyMgr initializes a new concurrency manager.
 func NewConcurrencyMgr() *ConcurrencyMgr {
+	lt := NewLockTable()
 	return &ConcurrencyMgr{
-		LockTable: &LockTable{},
+		LockTable: lt,
 		Locks:     make(map[file.BlockId]string),
 	}
 }
 
-// SLock obtains an SLock on the block, if necessary.
 func (cm *ConcurrencyMgr) SLock(blk file.BlockId) {
 	if _, exists := cm.Locks[blk]; !exists {
 		cm.LockTable.SLock(blk)
@@ -23,7 +22,6 @@ func (cm *ConcurrencyMgr) SLock(blk file.BlockId) {
 	}
 }
 
-// XLock obtains an XLock on the block, if necessary.
 func (cm *ConcurrencyMgr) XLock(blk file.BlockId) {
 	if !cm.HasXLock(blk) {
 		cm.SLock(blk)
@@ -32,7 +30,6 @@ func (cm *ConcurrencyMgr) XLock(blk file.BlockId) {
 	}
 }
 
-// Release releases all locks.
 func (cm *ConcurrencyMgr) Release() {
 	for blk := range cm.Locks {
 		cm.LockTable.Unlock(blk)
@@ -40,7 +37,6 @@ func (cm *ConcurrencyMgr) Release() {
 	}
 }
 
-// HasXLock checks if the block has an XLock.
 func (cm *ConcurrencyMgr) HasXLock(blk file.BlockId) bool {
 	lockType, exists := cm.Locks[blk]
 	return exists && lockType == "X"
