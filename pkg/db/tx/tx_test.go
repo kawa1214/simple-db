@@ -50,3 +50,20 @@ func TestTx(t *testing.T) {
 
 	t.Error()
 }
+
+func TestMoreTx(t *testing.T) {
+	rootDir := util.ProjectRootDir()
+	dir := rootDir + "/.tmp"
+	fm := file.NewFileMgr(dir, 400)
+	lm := log.NewLogMgr(fm, "testlogfile")
+	bm := buffer.NewBufferMgr(fm, lm, 8)
+
+	tx := NewTransaction(fm, lm, bm)
+	blk := file.NewBlockId("testfile", 1)
+	tx.Pin(blk)
+
+	for i := 0; i < 50; i++ {
+		tx.SetInt(blk, 80, 1, false)
+	}
+	tx.Commit()
+}
