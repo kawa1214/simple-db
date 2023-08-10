@@ -56,7 +56,7 @@ func (rp *RecordPage) Format() {
 			if err != nil {
 				panic(err)
 			}
-			if schemaType == INTEGER {
+			if schemaType == Integer {
 				rp.tx.SetInt(rp.blk, fldpos, 0, false)
 			} else {
 				rp.tx.SetString(rp.blk, fldpos, "", false)

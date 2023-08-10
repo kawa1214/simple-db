@@ -1,9 +1,6 @@
 package record
 
 import (
-	"fmt"
-	"math"
-	"math/rand"
 	"testing"
 
 	"github.com/kawa1214/simple-db/pkg/db/buffer"
@@ -33,37 +30,30 @@ func TestTableScan(t *testing.T) {
 
 	t.Logf("table has %d slots\n", layout.SlotSize())
 	ts := NewTableScan(tx, "T", layout)
-	for i := 0; i < 10; i++ {
-		ts.Insert()
-		n := int(math.Round(rand.Float64() * 50))
-		ts.SetInt("A", n)
-		ts.SetString("B", "rec"+fmt.Sprint(n))
-		t.Logf("inserting into slot %s: {%d, rec%d}\n", ts.GetRid(), n, n)
+
+	t.Logf("table has %d slots\n", layout.SlotSize())
+	count := 0
+	ts.BeforeFirst()
+	for ts.Next() {
+		a := ts.GetInt("A")
+		b := ts.GetString("B")
+		if a < 25 {
+			count++
+			t.Logf("slot %s: {%d, %s}\n", ts.GetRid(), a, b)
+			ts.Delete()
+		}
 	}
+	t.Logf("table has %d slots\n", layout.SlotSize())
 
-	// t.Logf("table has %d slots\n", layout.SlotSize())
-	// count := 0
-	// ts.BeforeFirst()
-	// for ts.Next() {
-	// 	a := ts.GetInt("A")
-	// 	b := ts.GetString("B")
-	// 	if a < 25 {
-	// 		count++
-	// 		t.Logf("slot %s: {%d, %s}\n", ts.GetRid(), a, b)
-	// 		ts.Delete()
-	// 	}
-	// }
-	// t.Logf("table has %d slots\n", layout.SlotSize())
+	t.Logf("Here are the remaining records.")
+	ts.BeforeFirst()
+	for ts.Next() {
+		a := ts.GetInt("A")
+		b := ts.GetString("B")
+		t.Logf("slot %s: {%d, %s}\n", ts.GetRid(), a, b)
+	}
+	ts.Close()
+	tx.Commit()
 
-	// t.Logf("Here are the remaining records.")
-	// ts.BeforeFirst()
-	// for ts.Next() {
-	// 	a := ts.GetInt("A")
-	// 	b := ts.GetString("B")
-	// 	t.Logf("slot %s: {%d, %s}\n", ts.GetRid(), a, b)
-	// }
-	// ts.Close()
-	// tx.Commit()
-
-	// t.Error()
+	t.Error()
 }

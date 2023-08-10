@@ -57,7 +57,7 @@ func (ts *TableScan) GetVal(fldname string) *Constant {
 	if err != nil {
 		panic(err)
 	}
-	if schemaType == INTEGER {
+	if schemaType == Integer {
 		return NewConstant(ts.GetInt(fldname))
 	}
 	return NewConstant(ts.GetString(fldname))
@@ -86,7 +86,7 @@ func (ts *TableScan) SetVal(fldname string, val *Constant) {
 	if err != nil {
 		panic(err)
 	}
-	if schemaType == INTEGER {
+	if schemaType == Integer {
 		ts.SetInt(fldname, val.AsInt())
 	} else {
 		ts.SetString(fldname, val.AsString())

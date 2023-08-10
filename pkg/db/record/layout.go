@@ -3,7 +3,7 @@ package record
 import "github.com/kawa1214/simple-db/pkg/db/file"
 
 // INTEGER constant to represent Integer type
-const INTEGER = 0 // You might want to define this elsewhere or use an existing constant
+// const INTEGER = 0 // You might want to define this elsewhere or use an existing constant
 
 type Layout struct {
 	schema   *Schema
@@ -50,7 +50,7 @@ func (l *Layout) lengthInBytes(fldname string) int {
 	if err != nil {
 		panic(err)
 	}
-	if fldtype == INTEGER {
+	if fldtype == Integer {
 		return 4 // equivalent to Integer.BYTES in Java; 4 bytes for an int32
 	}
 	// else clause for VARCHAR type
