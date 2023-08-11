@@ -55,5 +55,5 @@ func TestTableScan(t *testing.T) {
 	ts.Close()
 	tx.Commit()
 
-	t.Error()
+	// t.Error()
 }

@@ -58,9 +58,9 @@ func (ts *TableScan) GetVal(fldname string) *Constant {
 		panic(err)
 	}
 	if schemaType == Integer {
-		return NewConstant(ts.GetInt(fldname))
+		return NewIntConstant(ts.GetInt(fldname))
 	}
-	return NewConstant(ts.GetString(fldname))
+	return NewStringConstant(ts.GetString(fldname))
 }
 
 func (ts *TableScan) HasField(fldname string) bool {
