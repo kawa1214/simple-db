@@ -26,25 +26,28 @@ func (ps *ProjectScan) Next() bool {
 	return ps.s.Next()
 }
 
-func (ps *ProjectScan) GetInt(fldname string) (int, error) {
+func (ps *ProjectScan) GetInt(fldname string) int {
 	if ps.HasField(fldname) {
-		return ps.s.GetInt(fldname), nil
+		return ps.s.GetInt(fldname)
 	}
-	return 0, fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
+	panic(fmt.Sprintf("field %s not found", fldname))
+	// return 0, fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
 }
 
-func (ps *ProjectScan) GetString(fldname string) (string, error) {
+func (ps *ProjectScan) GetString(fldname string) string {
 	if ps.HasField(fldname) {
-		return ps.s.GetString(fldname), nil
+		return ps.s.GetString(fldname)
 	}
-	return "", fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
+	panic(fmt.Sprintf("field %s not found", fldname))
+	// return "", fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
 }
 
-func (ps *ProjectScan) GetVal(fldname string) (*record.Constant, error) {
+func (ps *ProjectScan) GetVal(fldname string) *record.Constant {
 	if ps.HasField(fldname) {
-		return ps.s.GetVal(fldname), nil
+		return ps.s.GetVal(fldname)
 	}
-	return nil, fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
+	panic(fmt.Sprintf("field %s not found", fldname))
+	// return nil, fmt.Errorf(fmt.Sprintf("field %s not found", fldname))
 }
 
 func (ps *ProjectScan) HasField(fldname string) bool {

@@ -1,7 +1,6 @@
 package query
 
 import (
-	"github.com/kawa1214/simple-db/pkg/db/plan"
 	"github.com/kawa1214/simple-db/pkg/db/record"
 )
 
@@ -23,7 +22,7 @@ func (t *Term) IsSatisfied(s Scan) bool {
 	return lhsval.Equals(rhsval)
 }
 
-func (t *Term) ReductionFactor(p plan.Plan) int {
+func (t *Term) ReductionFactor(p PlanInfo) int {
 	var lhsName, rhsName string
 	if t.lhs.IsFieldName() && t.rhs.IsFieldName() {
 		lhsName = t.lhs.AsFieldName()

@@ -62,14 +62,9 @@ func TestScan2(t *testing.T) {
 	fields := []string{"B", "D"}
 	s5 := NewProjectScan(s4, fields)
 	for s5.Next() {
-		bVal, err := s5.GetString("B")
-		if err != nil {
-			t.Error(err)
-		}
-		dVal, err := s5.GetString("D")
-		if err != nil {
-			t.Error(err)
-		}
+		bVal := s5.GetString("B")
+		dVal := s5.GetString("D")
+
 		t.Logf("%s %s\n", bVal, dVal)
 	}
 	s5.Close()

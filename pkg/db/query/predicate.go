@@ -3,7 +3,6 @@ package query
 import (
 	"strings"
 
-	"github.com/kawa1214/simple-db/pkg/db/plan"
 	"github.com/kawa1214/simple-db/pkg/db/record"
 )
 
@@ -50,7 +49,7 @@ func (p *Predicate) IsSatisfied(s Scan) bool {
 }
 
 // ReductionFactor calculates the extent to which selecting on the predicate reduces the number of records output by a query.
-func (p *Predicate) ReductionFactor(plan plan.Plan) int {
+func (p *Predicate) ReductionFactor(plan PlanInfo) int {
 	factor := 1
 	for _, t := range p.terms {
 		factor *= t.ReductionFactor(plan)

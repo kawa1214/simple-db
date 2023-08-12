@@ -6,7 +6,7 @@ type UpdateScan interface {
 	Scan // Embed the Scan interface
 
 	// SetVal modifies the field value of the current record using a Constant
-	SetVal(fldname string, val record.Constant)
+	SetVal(fldname string, val *record.Constant)
 
 	// SetInt modifies the field value of the current record with an integer value
 	SetInt(fldname string, val int)

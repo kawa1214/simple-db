@@ -60,7 +60,7 @@ func (ss *SelectScan) SetString(fldname string, val string) {
 	us.SetString(fldname, val)
 }
 
-func (ss *SelectScan) SetVal(fldname string, val record.Constant) {
+func (ss *SelectScan) SetVal(fldname string, val *record.Constant) {
 	us := ss.s.(UpdateScan)
 	us.SetVal(fldname, val)
 }

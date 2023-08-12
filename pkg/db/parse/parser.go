@@ -173,6 +173,9 @@ func (p *Parser) Modify() *ModifyData {
 // CreateTable parses and returns a create table data.
 func (p *Parser) CreateTable() *CreateTableData {
 	p.lex.EatKeyword("table")
+	// メモ: ここでt1(aが p.lex.sval に入っている
+	// 次のEatId()でt1が取り出されることを期待している
+	// しかし、EatId()でt1ではなくt1(aが取り出されてしまう
 	tblname := p.lex.EatId()
 	p.lex.EatDelim('(')
 	sch := p.fieldDefs()

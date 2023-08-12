@@ -18,7 +18,7 @@ import (
 func TestMetadata(t *testing.T) {
 	rootDir := util.ProjectRootDir()
 	dir := rootDir + "/.tmp"
-	fm := file.NewFileMgr(dir, 400)
+	fm := file.NewFileMgr(dir, 800)
 	lm := log.NewLogMgr(fm, "testlogfile")
 	bm := buffer.NewBufferMgr(fm, lm, 8)
 	tx := tx.NewTransaction(fm, lm, bm)
