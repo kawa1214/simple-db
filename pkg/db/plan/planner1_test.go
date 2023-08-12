@@ -16,7 +16,7 @@ import (
 
 func TestPlanner1(t *testing.T) {
 	rootDir := util.ProjectRootDir()
-	dir := rootDir + "/.tmp/scan1"
+	dir := rootDir + "/.tmp/plannertest1"
 	fm := file.NewFileMgr(dir, 400)
 	lm := log.NewLogMgr(fm, "testlogfile")
 	bm := buffer.NewBufferMgr(fm, lm, 8)
@@ -26,6 +26,7 @@ func TestPlanner1(t *testing.T) {
 	qp := NewBasicQueryPlanner(mdm)
 	up := NewBasicUpdatePlanner(mdm)
 	planner := NewPlanner(qp, up)
+
 	cmd := "create table T1(A int, B varchar(9))"
 	_ = planner.ExecuteUpdate(cmd, tx)
 
