@@ -92,6 +92,16 @@ func (c *Constant) ToString() string {
 	return ""
 }
 
+func (c *Constant) AnyValue() any {
+	if c.ival != nil {
+		return c.AsInt()
+	}
+	if c.sval != nil {
+		return c.AsString()
+	}
+	return nil
+}
+
 // type Constant struct {
 // 	Val interface{}
 // }

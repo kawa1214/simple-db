@@ -1,7 +1,6 @@
 package tx
 
 import (
-	"fmt"
 	"sync"
 	"sync/atomic"
 
@@ -41,14 +40,14 @@ func NewTransaction(fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) *Tra
 
 func (t *Transaction) Commit() {
 	t.recoveryMgr.Commit()
-	fmt.Println("transaction", t.txnum, "committed")
+	// fmt.Println("transaction", t.txnum, "committed")
 	t.concurMgr.Release()
 	t.mybuffers.UnpinAll()
 }
 
 func (t *Transaction) Rollback() {
 	t.recoveryMgr.Rollback()
-	fmt.Println("transaction", t.txnum, "rolled back")
+	// fmt.Println("transaction", t.txnum, "rolled back")
 	t.concurMgr.Release()
 	t.mybuffers.UnpinAll()
 }

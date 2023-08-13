@@ -7,6 +7,7 @@ import (
 	"github.com/kawa1214/simple-db/pkg/db/buffer"
 	"github.com/kawa1214/simple-db/pkg/db/file"
 	"github.com/kawa1214/simple-db/pkg/db/log"
+	"github.com/kawa1214/simple-db/pkg/db/metadata"
 	"github.com/kawa1214/simple-db/pkg/db/record"
 	"github.com/kawa1214/simple-db/pkg/db/tx"
 	"github.com/kawa1214/simple-db/pkg/util"
@@ -25,8 +26,8 @@ func TestProduct(t *testing.T) {
 
 	// sch1 := simpledb.NewSchema()
 	sch1 := record.NewSchema()
-	// mdm1 := metadata.NewMetadataMgr(true, tx)
-	// mdm1.CreateTable("MyTable", sch1, tx)
+	mdm1 := metadata.NewMetadataMgr(true, tx)
+	mdm1.CreateTable("MyTable", sch1, tx)
 	sch1.AddIntField("A")
 	sch1.AddStringField("B", 9)
 	layout1 := record.NewLayoutFromSchema(sch1)
