@@ -27,12 +27,28 @@ func NewIndexInfo(idxname, fldname string, tblSchema *record.Schema, tx *tx.Tran
 	return ii
 }
 
-// TODO:
 // Open opens the index described by this object.
+// → NewHashIndexFromMetadata
 // func (ii *IndexInfo) Open() Index {
 // 	return NewHashIndex(ii.tx, ii.idxname, ii.idxLayout)
 // 	// return NewBTreeIndex(ii.tx, ii.idxname, ii.idxLayout)
 // }
+
+func (ii *IndexInfo) IndexName() string {
+	return ii.idxname
+}
+
+func (ii *IndexInfo) IdxLayout() *record.Layout {
+	return ii.idxLayout
+}
+
+func (ii *IndexInfo) IndexTx() *tx.Transaction {
+	return ii.tx
+}
+
+func (ii *IndexInfo) Si() *StatInfo {
+	return ii.si
+}
 
 // TODO:
 // BlocksAccessed estimates the number of block accesses required to find all index records.

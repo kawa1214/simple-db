@@ -10,6 +10,7 @@ import (
 	_ "github.com/kawa1214/simple-db/pkg/db/driver"
 )
 
+// TODO: move to pkg/db/driver/driver_test.go
 func TestServer(t *testing.T) {
 	name := randomString(30)
 	db, err := sql.Open("simple", name)
