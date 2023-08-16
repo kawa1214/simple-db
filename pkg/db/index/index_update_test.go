@@ -22,7 +22,7 @@ func TestIndexUpdate(t *testing.T) {
 	bm := buffer.NewBufferMgr(fm, lm, 8)
 
 	tx := tx.NewTransaction(fm, lm, bm)
-	mdm := metadata.NewMetadataMgr(true, tx)
+	mdm := metadata.NewMetadataMgr(false, tx)
 	studentPlan := plan.NewTablePlan(tx, "student", mdm)
 	studentScan := studentPlan.Open().(query.UpdateScan)
 
@@ -37,7 +37,7 @@ func TestIndexUpdate(t *testing.T) {
 	// Task 1: insert a new STUDENT record for Sam
 	//    First, insert the record into STUDENT.
 	studentScan.Insert()
-	studentScan.SetInt("sid", 11)
+	studentScan.SetInt("studentid", 11)
 	studentScan.SetString("sname", "sam")
 	studentScan.SetInt("gradyear", 2023)
 	studentScan.SetInt("majorid", 30)
