@@ -54,7 +54,7 @@ func (bm *BufferMgr) Unpin(buff *Buffer) {
 	}
 }
 
-func (bm *BufferMgr) Pin(blk *file.BlockId) (*Buffer, error) {
+func (bm *BufferMgr) Pin(blk *file.BlockID) (*Buffer, error) {
 	bm.mu.Lock()
 	defer bm.mu.Unlock()
 	startTime := time.Now()
@@ -75,7 +75,7 @@ func (bm *BufferMgr) waitingTooLong(startTime time.Time) bool {
 	return time.Since(startTime) > MAX_TIME
 }
 
-func (bm *BufferMgr) tryToPin(blk *file.BlockId) (*Buffer, error) {
+func (bm *BufferMgr) tryToPin(blk *file.BlockID) (*Buffer, error) {
 	buff := bm.findExistingBuffer(blk)
 	if buff == nil {
 		buff = bm.chooseUnpinnedBuffer()
@@ -91,10 +91,10 @@ func (bm *BufferMgr) tryToPin(blk *file.BlockId) (*Buffer, error) {
 	return buff, nil
 }
 
-func (bm *BufferMgr) findExistingBuffer(blk *file.BlockId) *Buffer {
+func (bm *BufferMgr) findExistingBuffer(blk *file.BlockID) *Buffer {
 	for _, buff := range bm.bufferpool {
 		b := buff.Block()
-		if b != nil && b.Equals(blk) {
+		if b != nil && b.Equal(blk) {
 			return buff
 		}
 	}

@@ -18,7 +18,7 @@ func (e LockAbortException) Error() string {
 
 // LockTable provides methods to lock and unlock blocks.
 type LockTable struct {
-	locks map[file.BlockId]int
+	locks map[file.BlockID]int
 	mu    sync.Mutex
 	cond  *sync.Cond
 }
@@ -26,14 +26,14 @@ type LockTable struct {
 // NewLockTable creates a new lock table.
 func NewLockTable() *LockTable {
 	lt := &LockTable{
-		locks: make(map[file.BlockId]int),
+		locks: make(map[file.BlockID]int),
 	}
 	lt.cond = sync.NewCond(&lt.mu)
 	return lt
 }
 
 // SLock grants an SLock on the specified block.
-func (lt *LockTable) SLock(blk file.BlockId) {
+func (lt *LockTable) SLock(blk file.BlockID) {
 	lt.mu.Lock()
 	defer lt.mu.Unlock()
 
@@ -49,7 +49,7 @@ func (lt *LockTable) SLock(blk file.BlockId) {
 }
 
 // XLock grants an XLock on the specified block.
-func (lt *LockTable) XLock(blk file.BlockId) {
+func (lt *LockTable) XLock(blk file.BlockID) {
 	lt.mu.Lock()
 	defer lt.mu.Unlock()
 
@@ -64,7 +64,7 @@ func (lt *LockTable) XLock(blk file.BlockId) {
 }
 
 // Unlock releases a lock on the specified block.
-func (lt *LockTable) Unlock(blk file.BlockId) {
+func (lt *LockTable) Unlock(blk file.BlockID) {
 	lt.mu.Lock()
 	defer lt.mu.Unlock()
 
@@ -77,11 +77,11 @@ func (lt *LockTable) Unlock(blk file.BlockId) {
 	}
 }
 
-func (lt *LockTable) hasXlock(blk file.BlockId) bool {
+func (lt *LockTable) hasXlock(blk file.BlockID) bool {
 	return lt.getLockVal(blk) < 0
 }
 
-func (lt *LockTable) hasOtherSLocks(blk file.BlockId) bool {
+func (lt *LockTable) hasOtherSLocks(blk file.BlockID) bool {
 	return lt.getLockVal(blk) > 1
 }
 
@@ -89,7 +89,7 @@ func waitingTooLong(startTime time.Time) bool {
 	return time.Since(startTime) > maxTime
 }
 
-func (lt *LockTable) getLockVal(blk file.BlockId) int {
+func (lt *LockTable) getLockVal(blk file.BlockID) int {
 	val, ok := lt.locks[blk]
 	if !ok {
 		return 0

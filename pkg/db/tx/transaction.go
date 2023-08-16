@@ -57,27 +57,27 @@ func (t *Transaction) Recover() {
 	t.recoveryMgr.Recover()
 }
 
-func (t *Transaction) Pin(blk *file.BlockId) {
+func (t *Transaction) Pin(blk *file.BlockID) {
 	t.mybuffers.Pin(blk)
 }
 
-func (t *Transaction) Unpin(blk *file.BlockId) {
+func (t *Transaction) Unpin(blk *file.BlockID) {
 	t.mybuffers.Unpin(*blk)
 }
 
-func (t *Transaction) GetInt(blk *file.BlockId, offset int) int {
+func (t *Transaction) GetInt(blk *file.BlockID, offset int) int {
 	t.concurMgr.SLock(*blk)
 	buff := t.mybuffers.GetBuffer(*blk)
 	return buff.Contents().GetInt(offset)
 }
 
-func (t *Transaction) GetString(blk *file.BlockId, offset int) string {
+func (t *Transaction) GetString(blk *file.BlockID, offset int) string {
 	t.concurMgr.SLock(*blk)
 	buff := t.mybuffers.GetBuffer(*blk)
 	return buff.Contents().GetString(offset)
 }
 
-func (t *Transaction) SetInt(blk *file.BlockId, offset int, val int, okToLog bool) {
+func (t *Transaction) SetInt(blk *file.BlockID, offset int, val int, okToLog bool) {
 	t.concurMgr.XLock(*blk)
 	buff := t.mybuffers.GetBuffer(*blk)
 	var lsn int = -1
@@ -93,7 +93,7 @@ func (t *Transaction) SetInt(blk *file.BlockId, offset int, val int, okToLog boo
 	buff.SetModified(t.txnum, lsn)
 }
 
-func (t *Transaction) SetString(blk *file.BlockId, offset int, val string, okToLog bool) {
+func (t *Transaction) SetString(blk *file.BlockID, offset int, val string, okToLog bool) {
 	t.concurMgr.XLock(*blk)
 	buff := t.mybuffers.GetBuffer(*blk)
 	var lsn int = -1
@@ -110,7 +110,7 @@ func (t *Transaction) SetString(blk *file.BlockId, offset int, val string, okToL
 }
 
 func (t *Transaction) Size(filename string) int {
-	dummyblk := file.NewBlockId(filename, END_OF_FILE)
+	dummyblk := file.NewBlockID(filename, END_OF_FILE)
 	t.concurMgr.SLock(*dummyblk)
 	len, err := t.fm.Length(filename)
 	if err != nil {
@@ -119,8 +119,8 @@ func (t *Transaction) Size(filename string) int {
 	return len
 }
 
-func (t *Transaction) Append(filename string) *file.BlockId {
-	dummyblk := file.NewBlockId(filename, END_OF_FILE)
+func (t *Transaction) Append(filename string) *file.BlockID {
+	dummyblk := file.NewBlockID(filename, END_OF_FILE)
 	t.concurMgr.XLock(*dummyblk)
 	block, err := t.fm.Append(filename)
 	if err != nil {

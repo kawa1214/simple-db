@@ -9,7 +9,7 @@ import (
 
 type SetIntRecord struct {
 	txnum, offset, val int
-	blk                *file.BlockId
+	blk                *file.BlockID
 }
 
 // NewSetIntRecord initializes a new SetIntRecord from a Page.
@@ -20,7 +20,7 @@ func NewSetIntRecord(p *file.Page) *SetIntRecord {
 	filename := p.GetString(fpos)
 	bpos := fpos + file.MaxLength(len(filename))
 	blknum := p.GetInt(bpos)
-	blk := file.NewBlockId(filename, blknum)
+	blk := file.NewBlockID(filename, blknum)
 	opos := bpos + 4
 	offset := p.GetInt(opos)
 	vpos := opos + 4
@@ -52,7 +52,7 @@ func (sr *SetIntRecord) Undo(tx *Transaction) {
 
 // WriteToLog writes a setInt record to the log.
 // This log record contains the SETINT operator, followed by the transaction id, the filename, number, and offset of the modified block, and the previous integer value at that offset.
-func SetIntRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockId, offset int, val int) int {
+func SetIntRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockID, offset int, val int) int {
 	tpos := 4
 	fpos := tpos + 4
 	bpos := fpos + file.MaxLength(len(blk.FileName()))

@@ -14,7 +14,7 @@ type BTreeIndex struct {
 	leafLayout *record.Layout
 	leaftbl    string
 	leaf       *BTreeLeaf
-	rootblk    *file.BlockId
+	rootblk    *file.BlockID
 }
 
 func NewBTreeIndex(tx *tx.Transaction, idxname string, leafLayout *record.Layout) *BTreeIndex {
@@ -32,7 +32,7 @@ func NewBTreeIndex(tx *tx.Transaction, idxname string, leafLayout *record.Layout
 	dirsch.Add("dataval", leafLayout.Schema())
 	dirLayout := record.NewLayoutFromSchema(dirsch)
 	dirtbl := idxname + "dir"
-	rootblk := file.NewBlockId(dirtbl, 0)
+	rootblk := file.NewBlockID(dirtbl, 0)
 	if tx.Size(dirtbl) == 0 {
 		tx.Append(dirtbl)
 		node := NewBTPage(tx, rootblk, dirLayout)
@@ -68,7 +68,7 @@ func (idx *BTreeIndex) BeforeFirst(searchkey *record.Constant) {
 	root := NewBTreeDir(idx.tx, idx.rootblk, idx.dirLayout)
 	blknum := root.Search(searchkey)
 	root.Close()
-	leafblk := file.NewBlockId(idx.leaftbl, blknum)
+	leafblk := file.NewBlockID(idx.leaftbl, blknum)
 	idx.leaf = NewBTreeLeaf(idx.tx, leafblk, idx.leafLayout, searchkey)
 }
 

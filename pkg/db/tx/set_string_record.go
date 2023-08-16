@@ -11,7 +11,7 @@ import (
 type SetStringRecord struct {
 	txnum, offset int
 	val           string
-	blk           *file.BlockId
+	blk           *file.BlockID
 }
 
 // NewSetStringRecord initializes a new SetStringRecord from a Page.
@@ -22,7 +22,7 @@ func NewSetStringRecord(p *file.Page) *SetStringRecord {
 	filename := p.GetString(fpos)
 	bpos := fpos + file.MaxLength(len(filename))
 	blknum := p.GetInt(bpos)
-	blk := file.NewBlockId(filename, blknum)
+	blk := file.NewBlockID(filename, blknum)
 	opos := bpos + 4
 	offset := p.GetInt(opos)
 	vpos := opos + 4
@@ -53,7 +53,7 @@ func (sr *SetStringRecord) Undo(tx *Transaction) {
 }
 
 // WriteToLog writes a setString record to the log.
-func SetStringRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockId, offset int, val string) int {
+func SetStringRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockID, offset int, val string) int {
 	tpos := 4
 	fpos := tpos + 4
 	bpos := fpos + file.MaxLength(len(blk.FileName()))

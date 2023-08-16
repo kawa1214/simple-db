@@ -4,13 +4,13 @@ import "github.com/kawa1214/simple-db/pkg/db/file"
 
 type LogIterator struct {
 	fm         *file.FileMgr
-	blk        *file.BlockId
+	blk        *file.BlockID
 	p          *file.Page
 	currentpos int
 	boundary   int
 }
 
-func NewLogIterator(fm *file.FileMgr, blk *file.BlockId) *LogIterator {
+func NewLogIterator(fm *file.FileMgr, blk *file.BlockID) *LogIterator {
 	page := file.NewPage(fm.BlockSize())
 	li := &LogIterator{
 		fm:  fm,
@@ -27,7 +27,7 @@ func (li *LogIterator) HasNext() bool {
 
 func (li *LogIterator) Next() []byte {
 	if li.currentpos == li.fm.BlockSize() {
-		blockId := file.NewBlockId(li.blk.FileName(), li.blk.Number()-1)
+		blockId := file.NewBlockID(li.blk.FileName(), li.blk.Number()-1)
 		li.blk = blockId
 		li.moveToBlock(li.blk)
 	}
@@ -36,7 +36,7 @@ func (li *LogIterator) Next() []byte {
 	return rec
 }
 
-func (li *LogIterator) moveToBlock(blk *file.BlockId) {
+func (li *LogIterator) moveToBlock(blk *file.BlockID) {
 	li.fm.Read(blk, li.p)
 	li.boundary = li.p.GetInt(0)
 	li.currentpos = li.boundary

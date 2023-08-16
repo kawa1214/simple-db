@@ -10,7 +10,7 @@ func TestFileMgr(t *testing.T) {
 	rootDir := util.ProjectRootDir()
 	dir := rootDir + "/.tmp"
 	fm := NewFileMgr(dir, 400)
-	blk := NewBlockId("testfile", 2)
+	blk := NewBlockID("testfile", 2)
 	pos1 := 88
 
 	p1 := NewPage(fm.BlockSize())

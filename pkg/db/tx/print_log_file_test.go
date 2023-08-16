@@ -16,7 +16,7 @@ func TestPrintLogFile(t *testing.T) {
 	lm := log.NewLogMgr(fm, filename)
 	lastblock, _ := fm.Length(filename)
 	lastblock--
-	blk := file.NewBlockId(filename, lastblock)
+	blk := file.NewBlockID(filename, lastblock)
 	p := file.NewPage(fm.BlockSize())
 	fm.Read(blk, p)
 

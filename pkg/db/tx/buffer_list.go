@@ -6,28 +6,28 @@ import (
 )
 
 type BufferList struct {
-	buffers map[file.BlockId]*buffer.Buffer
-	pins    []file.BlockId
+	buffers map[file.BlockID]*buffer.Buffer
+	pins    []file.BlockID
 	bm      *buffer.BufferMgr
 }
 
 // NewBufferList creates a new buffer list associated with the given buffer manager.
 func NewBufferList(bm *buffer.BufferMgr) *BufferList {
 	return &BufferList{
-		buffers: make(map[file.BlockId]*buffer.Buffer),
-		pins:    make([]file.BlockId, 0),
+		buffers: make(map[file.BlockID]*buffer.Buffer),
+		pins:    make([]file.BlockID, 0),
 		bm:      bm,
 	}
 }
 
 // GetBuffer returns the buffer pinned to the specified block.
 // The method returns nil if the transaction has not pinned the block.
-func (bl *BufferList) GetBuffer(blk file.BlockId) *buffer.Buffer {
+func (bl *BufferList) GetBuffer(blk file.BlockID) *buffer.Buffer {
 	return bl.buffers[blk]
 }
 
 // Pin pins the block and keeps track of the buffer internally.
-func (bl *BufferList) Pin(blk *file.BlockId) {
+func (bl *BufferList) Pin(blk *file.BlockID) {
 	buff, err := bl.bm.Pin(blk)
 	if err != nil {
 		panic(err)
@@ -37,7 +37,7 @@ func (bl *BufferList) Pin(blk *file.BlockId) {
 }
 
 // Unpin unpins the specified block.
-func (bl *BufferList) Unpin(blk file.BlockId) {
+func (bl *BufferList) Unpin(blk file.BlockID) {
 	buff := bl.buffers[blk]
 	bl.bm.Unpin(buff)
 	bl.removeBlockFromPins(blk)
@@ -52,12 +52,12 @@ func (bl *BufferList) UnpinAll() {
 		buff := bl.buffers[blk]
 		bl.bm.Unpin(buff)
 	}
-	bl.buffers = make(map[file.BlockId]*buffer.Buffer)
-	bl.pins = make([]file.BlockId, 0)
+	bl.buffers = make(map[file.BlockID]*buffer.Buffer)
+	bl.pins = make([]file.BlockID, 0)
 }
 
 // containsBlockInPins checks if the pins slice contains the specified block.
-func (bl *BufferList) containsBlockInPins(blk file.BlockId) bool {
+func (bl *BufferList) containsBlockInPins(blk file.BlockID) bool {
 	for _, b := range bl.pins {
 		if b == blk {
 			return true
@@ -67,7 +67,7 @@ func (bl *BufferList) containsBlockInPins(blk file.BlockId) bool {
 }
 
 // removeBlockFromPins removes the first occurrence of the specified block from the pins slice.
-func (bl *BufferList) removeBlockFromPins(blk file.BlockId) {
+func (bl *BufferList) removeBlockFromPins(blk file.BlockID) {
 	for i, b := range bl.pins {
 		if b == blk {
 			bl.pins = append(bl.pins[:i], bl.pins[i+1:]...)

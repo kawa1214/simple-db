@@ -10,7 +10,7 @@ type LogMgr struct {
 	fm           *file.FileMgr
 	logfile      string
 	logpage      *file.Page
-	currentblk   *file.BlockId
+	currentblk   *file.BlockID
 	latestLSN    int
 	lastSavedLSN int
 	mutex        sync.Mutex
@@ -30,7 +30,7 @@ func NewLogMgr(fm *file.FileMgr, logfile string) *LogMgr {
 	if logsize == 0 {
 		lm.currentblk = lm.appendNewBlock()
 	} else {
-		lm.currentblk = file.NewBlockId(logfile, logsize-1)
+		lm.currentblk = file.NewBlockID(logfile, logsize-1)
 		fm.Read(lm.currentblk, lm.logpage)
 	}
 	return lm
@@ -67,7 +67,7 @@ func (lm *LogMgr) Append(logrec []byte) int {
 	return lm.latestLSN
 }
 
-func (lm *LogMgr) appendNewBlock() *file.BlockId {
+func (lm *LogMgr) appendNewBlock() *file.BlockID {
 	blk, err := lm.fm.Append(lm.logfile)
 	if err != nil {
 		panic(err)

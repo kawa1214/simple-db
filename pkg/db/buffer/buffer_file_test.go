@@ -16,7 +16,7 @@ func TestBufferFile(t *testing.T) {
 	lm := log.NewLogMgr(fm, "testlogfile")
 
 	bm := NewBufferMgr(fm, lm, 8)
-	blk := file.NewBlockId("testfile", 2)
+	blk := file.NewBlockID("testfile", 2)
 	pos1 := 88
 
 	b1, err := bm.Pin(blk)

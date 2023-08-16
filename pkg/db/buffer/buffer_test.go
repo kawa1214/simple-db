@@ -18,7 +18,7 @@ func TestBuffer(t *testing.T) {
 
 	bm := NewBufferMgr(fm, lm, 3)
 
-	buff1, err := bm.Pin(file.NewBlockId("testfile", 1))
+	buff1, err := bm.Pin(file.NewBlockID("testfile", 1))
 	if err != nil {
 		t.Error(err)
 	}
@@ -32,21 +32,21 @@ func TestBuffer(t *testing.T) {
 	// これらのピンのいずれかがbuff1をディスクにフラッシュする：
 	// 新しいブロックをピン留めする→バッファがいっぱいになる→buff1がディスクにフラッシュされる
 	// もしくは、bm.FlushAll(1)でもbuff1がディスクにフラッシュされる
-	buff2, err := bm.Pin(file.NewBlockId("testfile", 2))
+	buff2, err := bm.Pin(file.NewBlockID("testfile", 2))
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = bm.Pin(file.NewBlockId("testfile", 3))
+	_, err = bm.Pin(file.NewBlockID("testfile", 3))
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = bm.Pin(file.NewBlockId("testfile", 4))
+	_, err = bm.Pin(file.NewBlockID("testfile", 4))
 	if err != nil {
 		t.Error(err)
 	}
 
 	bm.Unpin(buff2)
-	buff2, err = bm.Pin(file.NewBlockId("testfile", 1))
+	buff2, err = bm.Pin(file.NewBlockID("testfile", 1))
 	if err != nil {
 		t.Error(err)
 	}

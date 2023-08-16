@@ -29,7 +29,7 @@ func NewChunkScan(tx *tx.Transaction, filename string, layout *record.Layout, st
 		endbnum:   endbnum,
 	}
 	for i := startbnum; i <= endbnum; i++ {
-		blk := file.NewBlockId(filename, i)
+		blk := file.NewBlockID(filename, i)
 		cs.buffs = append(cs.buffs, record.NewRecordPage(tx, blk, layout))
 	}
 	cs.moveToBlock(startbnum)
@@ -39,7 +39,7 @@ func NewChunkScan(tx *tx.Transaction, filename string, layout *record.Layout, st
 // Close closes the ChunkScan.
 func (cs *ChunkScan) Close() {
 	for i := 0; i < len(cs.buffs); i++ {
-		blk := file.NewBlockId(cs.filename, cs.startbnum+i)
+		blk := file.NewBlockID(cs.filename, cs.startbnum+i)
 		cs.tx.Unpin(blk)
 	}
 }

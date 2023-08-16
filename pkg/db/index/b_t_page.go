@@ -12,11 +12,11 @@ const (
 
 type BTPage struct {
 	tx         *tx.Transaction
-	currentblk *file.BlockId
+	currentblk *file.BlockID
 	layout     *record.Layout
 }
 
-func NewBTPage(tx *tx.Transaction, currentblk *file.BlockId, layout *record.Layout) *BTPage {
+func NewBTPage(tx *tx.Transaction, currentblk *file.BlockID, layout *record.Layout) *BTPage {
 	tx.Pin(currentblk)
 	return &BTPage{
 		tx:         tx,
@@ -44,7 +44,7 @@ func (p *BTPage) IsFull() bool {
 	return p.slotpos(p.GetNumRecs()+1) >= p.tx.BlockSize()
 }
 
-func (p *BTPage) Split(splitpos int, flag int) *file.BlockId {
+func (p *BTPage) Split(splitpos int, flag int) *file.BlockID {
 	newblk := p.appendNew(flag)
 	newpage := NewBTPage(p.tx, newblk, p.layout)
 	p.transferRecs(splitpos, newpage)
@@ -65,7 +65,7 @@ func (p *BTPage) SetFlag(val int) {
 	p.tx.SetInt(p.currentblk, 0, val, true)
 }
 
-func (p *BTPage) appendNew(flag int) *file.BlockId {
+func (p *BTPage) appendNew(flag int) *file.BlockID {
 	blk := p.tx.Append(p.currentblk.FileName())
 
 	p.tx.Pin(blk)
@@ -73,7 +73,7 @@ func (p *BTPage) appendNew(flag int) *file.BlockId {
 	return blk
 }
 
-func (p *BTPage) Format(blk *file.BlockId, flag int) {
+func (p *BTPage) Format(blk *file.BlockID, flag int) {
 	p.tx.SetInt(blk, 0, flag, false)
 	p.tx.SetInt(blk, intSize, 0, false)
 	recsize := p.layout.SlotSize()
@@ -82,7 +82,7 @@ func (p *BTPage) Format(blk *file.BlockId, flag int) {
 	}
 }
 
-func (p *BTPage) makeDefaultRecord(blk *file.BlockId, pos int) {
+func (p *BTPage) makeDefaultRecord(blk *file.BlockID, pos int) {
 	for _, fldname := range p.layout.Schema().Fields {
 		offset := p.layout.Offset(fldname)
 		schType, err := p.layout.Schema().Type(fldname)

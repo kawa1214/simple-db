@@ -13,7 +13,7 @@ type BTreeDir struct {
 	filename string
 }
 
-func NewBTreeDir(tx *tx.Transaction, blk *file.BlockId, layout *record.Layout) *BTreeDir {
+func NewBTreeDir(tx *tx.Transaction, blk *file.BlockID, layout *record.Layout) *BTreeDir {
 	return &BTreeDir{
 		tx:       tx,
 		layout:   layout,
@@ -73,11 +73,11 @@ func (dir *BTreeDir) insertEntry(e *DirEntry) *DirEntry {
 	return &DirEntry{dataVal: splitval, blockNum: newblk.Number()}
 }
 
-func (dir *BTreeDir) findChildBlock(searchkey *record.Constant) *file.BlockId {
+func (dir *BTreeDir) findChildBlock(searchkey *record.Constant) *file.BlockID {
 	slot := dir.contents.FindSlotBefore(searchkey)
 	if dir.contents.GetDataVal(slot + 1).Equals(searchkey) {
 		slot++
 	}
 	blknum := dir.contents.GetChildNum(slot)
-	return file.NewBlockId(dir.filename, blknum)
+	return file.NewBlockID(dir.filename, blknum)
 }

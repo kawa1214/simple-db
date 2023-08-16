@@ -35,7 +35,7 @@ func NewFileMgr(dbDirectory string, blocksize int) *FileMgr {
 	return mgr
 }
 
-func (mgr *FileMgr) Read(blk *BlockId, p *Page) error {
+func (mgr *FileMgr) Read(blk *BlockID, p *Page) error {
 	mgr.mu.Lock()
 	defer mgr.mu.Unlock()
 
@@ -53,7 +53,7 @@ func (mgr *FileMgr) Read(blk *BlockId, p *Page) error {
 	return err
 }
 
-func (mgr *FileMgr) Write(blk *BlockId, p *Page) error {
+func (mgr *FileMgr) Write(blk *BlockID, p *Page) error {
 	mgr.mu.Lock()
 	defer mgr.mu.Unlock()
 
@@ -71,12 +71,12 @@ func (mgr *FileMgr) Write(blk *BlockId, p *Page) error {
 	return err
 }
 
-func (mgr *FileMgr) Append(filename string) (*BlockId, error) {
+func (mgr *FileMgr) Append(filename string) (*BlockID, error) {
 	mgr.mu.Lock()
 	defer mgr.mu.Unlock()
 
 	newblknum := mgr.size(filename)
-	blk := NewBlockId(filename, newblknum)
+	blk := NewBlockID(filename, newblknum)
 	b := make([]byte, mgr.blocksize)
 
 	f, err := mgr.getFile(blk.FileName())

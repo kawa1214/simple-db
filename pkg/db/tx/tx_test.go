@@ -17,7 +17,7 @@ func TestTx(t *testing.T) {
 	bm := buffer.NewBufferMgr(fm, lm, 8)
 
 	tx1 := NewTransaction(fm, lm, bm)
-	blk := file.NewBlockId("testfile", 1)
+	blk := file.NewBlockID("testfile", 1)
 	tx1.Pin(blk)
 	tx1.SetInt(blk, 80, 1, false)
 	tx1.SetString(blk, 40, "one", false)
@@ -59,7 +59,7 @@ func TestMoreTx(t *testing.T) {
 	bm := buffer.NewBufferMgr(fm, lm, 8)
 
 	tx := NewTransaction(fm, lm, bm)
-	blk := file.NewBlockId("testfile", 1)
+	blk := file.NewBlockID("testfile", 1)
 	tx.Pin(blk)
 
 	for i := 0; i < 50; i++ {

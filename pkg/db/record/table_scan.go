@@ -111,7 +111,7 @@ func (ts *TableScan) Delete() {
 
 func (ts *TableScan) MoveToRid(rid *RID) {
 	ts.Close()
-	blk := file.NewBlockId(ts.filename, rid.BlockNumber())
+	blk := file.NewBlockID(ts.filename, rid.BlockNumber())
 	ts.rp = NewRecordPage(ts.tx, blk, ts.layout)
 	ts.currentslot = rid.Slot()
 }
@@ -122,7 +122,7 @@ func (ts *TableScan) GetRid() *RID {
 
 func (ts *TableScan) moveToBlock(blknum int) {
 	ts.Close()
-	blk := file.NewBlockId(ts.filename, blknum)
+	blk := file.NewBlockID(ts.filename, blknum)
 	ts.rp = NewRecordPage(ts.tx, blk, ts.layout)
 	ts.currentslot = -1
 }

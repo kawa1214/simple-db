@@ -15,7 +15,7 @@ type BTreeLeaf struct {
 	filename    string
 }
 
-func NewBTreeLeaf(tx *tx.Transaction, blk *file.BlockId, layout *record.Layout, searchkey *record.Constant) *BTreeLeaf {
+func NewBTreeLeaf(tx *tx.Transaction, blk *file.BlockID, layout *record.Layout, searchkey *record.Constant) *BTreeLeaf {
 	contents := NewBTPage(tx, blk, layout)
 	return &BTreeLeaf{
 		tx:          tx,
@@ -103,7 +103,7 @@ func (leaf *BTreeLeaf) tryOverflow() bool {
 		return false
 	}
 	leaf.contents.Close()
-	nextblk := file.NewBlockId(leaf.filename, flag)
+	nextblk := file.NewBlockID(leaf.filename, flag)
 	leaf.contents = NewBTPage(leaf.tx, nextblk, leaf.layout)
 	leaf.currentslot = 0
 	return true

@@ -27,8 +27,8 @@ func TestConcurrencyTest(t *testing.T) {
 }
 
 func A(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {
-	blk1 := file.NewBlockId("testfile", 1)
-	blk2 := file.NewBlockId("testfile", 2)
+	blk1 := file.NewBlockID("testfile", 1)
+	blk2 := file.NewBlockID("testfile", 2)
 	txA := NewTransaction(fm, lm, bm)
 	txA.Pin(blk1)
 	txA.Pin(blk2)
@@ -44,8 +44,8 @@ func A(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {
 }
 
 func B(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {
-	blk1 := file.NewBlockId("testfile", 1)
-	blk2 := file.NewBlockId("testfile", 2)
+	blk1 := file.NewBlockID("testfile", 1)
+	blk2 := file.NewBlockID("testfile", 2)
 	txB := NewTransaction(fm, lm, bm)
 	txB.Pin(blk1)
 	txB.Pin(blk2)
@@ -61,8 +61,8 @@ func B(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {
 }
 
 func C(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {
-	blk1 := file.NewBlockId("testfile", 1)
-	blk2 := file.NewBlockId("testfile", 2)
+	blk1 := file.NewBlockID("testfile", 1)
+	blk2 := file.NewBlockID("testfile", 2)
 	txC := NewTransaction(fm, lm, bm)
 	txC.Pin(blk1)
 	txC.Pin(blk2)

@@ -23,17 +23,17 @@ func TestBufferMgr(t *testing.T) {
 	bm := NewBufferMgr(fm, lm, 3)
 
 	buff := make([]*Buffer, 6)
-	block, err := bm.Pin(file.NewBlockId("testfile", 0))
+	block, err := bm.Pin(file.NewBlockID("testfile", 0))
 	if err != nil {
 		t.Error(err)
 	}
 	buff[0] = block
-	block, err = bm.Pin(file.NewBlockId("testfile", 1))
+	block, err = bm.Pin(file.NewBlockID("testfile", 1))
 	if err != nil {
 		t.Error(err)
 	}
 	buff[1] = block
-	block, err = bm.Pin(file.NewBlockId("testfile", 2))
+	block, err = bm.Pin(file.NewBlockID("testfile", 2))
 	if err != nil {
 		t.Error(err)
 	}
@@ -42,12 +42,12 @@ func TestBufferMgr(t *testing.T) {
 	bm.Unpin(buff[1])
 	buff[1] = nil
 
-	block, err = bm.Pin(file.NewBlockId("testfile", 0)) // block 0 pinned twice
+	block, err = bm.Pin(file.NewBlockID("testfile", 0)) // block 0 pinned twice
 	if err != nil {
 		t.Error(err)
 	}
 	buff[3] = block
-	block, err = bm.Pin(file.NewBlockId("testfile", 1)) // block 1 repinned
+	block, err = bm.Pin(file.NewBlockID("testfile", 1)) // block 1 repinned
 	if err != nil {
 		t.Error(err)
 	}
@@ -55,7 +55,7 @@ func TestBufferMgr(t *testing.T) {
 	t.Logf("Available buffers: %v", bm.Available())
 	// Available buffers: 0
 	t.Logf("Attempting to pin block 3...")
-	_, err = bm.Pin(file.NewBlockId("testfile", 3))
+	_, err = bm.Pin(file.NewBlockID("testfile", 3))
 	if err != nil {
 		t.Logf("Exception: No available buffers")
 		// ここでエラーが発生する
@@ -64,7 +64,7 @@ func TestBufferMgr(t *testing.T) {
 	}
 	bm.Unpin(buff[2])
 	buff[2] = nil
-	block, err = bm.Pin(file.NewBlockId("testfile", 3))
+	block, err = bm.Pin(file.NewBlockID("testfile", 3))
 	if err != nil {
 		t.Error(err)
 	}
