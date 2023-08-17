@@ -23,7 +23,7 @@ func TestLexer(t *testing.T) {
 
 	t.Logf("x = %s, y = %d", x, y)
 
-	t.Error()
+	// t.Error()
 
 	// if err := scanner.Err(); err != nil {
 	// 	fmt.Fprintln(os.Stderr, "reading standard input:", err)

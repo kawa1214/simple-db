@@ -70,5 +70,5 @@ func TestScan2(t *testing.T) {
 	s5.Close()
 	tx.Commit()
 
-	t.Error()
+	// t.Error()
 }

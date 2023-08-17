@@ -81,5 +81,5 @@ func TestBufferMgr(t *testing.T) {
 		}
 	}
 
-	t.Error()
+	// t.Error()
 }

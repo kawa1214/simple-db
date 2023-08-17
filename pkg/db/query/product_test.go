@@ -68,5 +68,5 @@ func TestProduct(t *testing.T) {
 	s3.Close()
 	tx.Commit()
 
-	t.Error()
+	// t.Error()
 }

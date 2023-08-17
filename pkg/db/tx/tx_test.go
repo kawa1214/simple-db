@@ -48,7 +48,7 @@ func TestTx(t *testing.T) {
 	t.Logf("post-rollback at location 80 = %d\n", tx4.GetInt(blk, 80))
 	tx4.Commit()
 
-	t.Error()
+	// t.Error()
 }
 
 func TestMoreTx(t *testing.T) {

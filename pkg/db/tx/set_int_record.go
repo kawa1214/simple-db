@@ -59,7 +59,7 @@ func SetIntRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockID, offset
 	opos := bpos + 4
 	vpos := opos + 4
 	rec := make([]byte, vpos+4)
-	p := file.NewLogPage(rec)
+	p := file.NewPageFromBytes(rec)
 	p.SetInt(0, SETINT)
 	p.SetInt(tpos, txnum)
 	p.SetString(fpos, blk.FileName())

@@ -11,19 +11,19 @@ type Page struct {
 	charset string
 }
 
-const defaultCharset = "US-ASCII" // Representing the US-ASCII charset
+const DEFAULT_CHARSET = "US-ASCII"
 
 func NewPage(blocksize int) *Page {
 	return &Page{
 		bb:      bytes.NewBuffer(make([]byte, blocksize)),
-		charset: defaultCharset,
+		charset: DEFAULT_CHARSET,
 	}
 }
 
-func NewLogPage(b []byte) *Page {
+func NewPageFromBytes(b []byte) *Page {
 	return &Page{
 		bb:      bytes.NewBuffer(b),
-		charset: defaultCharset,
+		charset: DEFAULT_CHARSET,
 	}
 }
 

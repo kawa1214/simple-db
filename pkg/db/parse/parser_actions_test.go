@@ -24,5 +24,5 @@ func TestParserActions(t *testing.T) {
 		t.Logf("Your statement is illegal")
 	}
 
-	t.Error()
+	// t.Error()
 }

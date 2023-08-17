@@ -27,11 +27,6 @@ func NewFileMgr(dbDirectory string, blocksize int) *FileMgr {
 		os.MkdirAll(dbDirectory, 0755)
 	}
 
-	files, _ := filepath.Glob(filepath.Join(dbDirectory, "temp*"))
-	for _, file := range files {
-		os.Remove(file)
-	}
-
 	return mgr
 }
 

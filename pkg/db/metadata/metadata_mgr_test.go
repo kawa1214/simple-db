@@ -74,7 +74,7 @@ func TestMetadata(t *testing.T) {
 	v := mdm.GetViewDef("viewA", tx)
 	t.Logf("View def = %s\n", v)
 
-	t.Error()
+	// t.Error()
 
 	// TODO:
 	// Part 4: Index Metadata

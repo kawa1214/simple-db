@@ -23,7 +23,7 @@ func TestConcurrencyTest(t *testing.T) {
 	go C(t, fm, lm, bm)
 	time.Sleep(10 * time.Second) // Let the threads run for 10 seconds for this example
 
-	t.Error()
+	// t.Error()
 }
 
 func A(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr) {

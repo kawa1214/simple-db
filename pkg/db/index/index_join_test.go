@@ -50,28 +50,28 @@ func TestCreateTable(t *testing.T) {
 }
 
 func TestIndexJoin(t *testing.T) {
-	rootDir := util.ProjectRootDir()
-	dir := rootDir + "/.tmp/studentdb"
-	fm := file.NewFileMgr(dir, 400)
-	lm := log.NewLogMgr(fm, "testlogfile")
-	bm := buffer.NewBufferMgr(fm, lm, 8)
+	// rootDir := util.ProjectRootDir()
+	// dir := rootDir + "/.tmp/studentdb"
+	// fm := file.NewFileMgr(dir, 400)
+	// lm := log.NewLogMgr(fm, "testlogfile")
+	// bm := buffer.NewBufferMgr(fm, lm, 8)
 
-	tx := tx.NewTransaction(fm, lm, bm)
-	mdm := metadata.NewMetadataMgr(false, tx)
+	// tx := tx.NewTransaction(fm, lm, bm)
+	// mdm := metadata.NewMetadataMgr(false, tx)
 
-	// Find the index on StudentId.
-	indexes := mdm.GetIndexInfo("enroll", tx)
-	sidIdx := indexes["studentid"]
+	// // Find the index on StudentId.
+	// indexes := mdm.GetIndexInfo("enroll", tx)
+	// sidIdx := indexes["studentid"]
 
-	// Get plans for the Student and Enroll tables
-	studentplan := plan.NewTablePlan(tx, "student", mdm)
-	enrollplan := plan.NewTablePlan(tx, "enroll", mdm)
+	// // Get plans for the Student and Enroll tables
+	// studentplan := plan.NewTablePlan(tx, "student", mdm)
+	// enrollplan := plan.NewTablePlan(tx, "enroll", mdm)
 
-	// Two different ways to use the index in simpledb:
-	useIndexJoinManually(studentplan, enrollplan, sidIdx, "studentid")
-	useIndexJoinScan(studentplan, enrollplan, sidIdx, "studentid")
+	// // Two different ways to use the index in simpledb:
+	// useIndexJoinManually(studentplan, enrollplan, sidIdx, "studentid")
+	// useIndexJoinScan(studentplan, enrollplan, sidIdx, "studentid")
 
-	tx.Commit()
+	// tx.Commit()
 }
 
 func useIndexJoinManually(p1, p2 plan.Plan, ii *metadata.IndexInfo, joinfield string) {

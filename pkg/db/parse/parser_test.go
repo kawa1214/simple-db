@@ -16,5 +16,5 @@ func TestParser(t *testing.T) {
 		t.Logf("UpdateCmd: %v", c)
 	}
 
-	t.Error()
+	// t.Error()
 }

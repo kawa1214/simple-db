@@ -61,7 +61,7 @@ func SetStringRecordWriteToLog(lm *log.LogMgr, txnum int, blk *file.BlockID, off
 	vpos := opos + 4
 	reclen := vpos + file.MaxLength(len(val))
 	rec := make([]byte, reclen)
-	p := file.NewLogPage(rec)
+	p := file.NewPageFromBytes(rec)
 	p.SetInt(0, SETSTRING)
 	p.SetInt(tpos, txnum)
 	p.SetString(fpos, blk.FileName())

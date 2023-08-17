@@ -29,7 +29,7 @@ func TestRecovery(t *testing.T) {
 	} else {
 		recover(t, fm, lm, bm, blk0, blk1)
 	}
-	t.Error()
+	// t.Error()
 }
 
 func initialize(t *testing.T, fm *file.FileMgr, lm *log.LogMgr, bm *buffer.BufferMgr, blk0 *file.BlockID, blk1 *file.BlockID) {

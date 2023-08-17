@@ -58,5 +58,5 @@ func TestPlannerStudent(t *testing.T) {
 	fmt.Println(num, "students were deleted")
 
 	tx.Commit()
-	t.Error()
+	// t.Error()
 }

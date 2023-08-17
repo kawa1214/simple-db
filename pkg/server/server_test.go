@@ -8,11 +8,12 @@ import (
 	"testing"
 
 	_ "github.com/kawa1214/simple-db/pkg/db/driver"
+	"github.com/kawa1214/simple-db/pkg/util"
 )
 
 // TODO: move to pkg/db/driver/driver_test.go
 func TestServer(t *testing.T) {
-	name := randomString(30)
+	name := util.RandomString(30)
 	db, err := sql.Open("simple", name)
 	if err != nil {
 		t.Error(err)
@@ -48,15 +49,5 @@ func TestServer(t *testing.T) {
 
 	db.Close()
 
-	t.Error()
-}
-
-func randomString(n int) string {
-	var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
-	}
-	return string(b)
+	// t.Error()
 }

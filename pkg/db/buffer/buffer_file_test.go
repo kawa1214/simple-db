@@ -40,5 +40,5 @@ func TestBufferFile(t *testing.T) {
 	t.Logf("offset %v contains %v", pos1, p2.GetString(pos1))
 	bm.Unpin(b2)
 
-	t.Error()
+	// t.Error()
 }

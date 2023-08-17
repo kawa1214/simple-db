@@ -39,7 +39,7 @@ func (cr *CheckpointRecord) String() string {
 // This log record contains the CHECKPOINT operator, and nothing else.
 func CheckpointRecordWriteToLog(lm *log.LogMgr) int {
 	rec := make([]byte, 4) // 4 bytes for an integer in Go
-	p := file.NewLogPage(rec)
+	p := file.NewPageFromBytes(rec)
 	p.SetInt(0, CHECKPOINT)
 	return lm.Append(rec)
 }

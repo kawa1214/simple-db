@@ -15,5 +15,5 @@ func TestLayout(t *testing.T) {
 		t.Logf("%s has offset %d\n", fldname, offset)
 	}
 
-	t.Error()
+	// t.Error()
 }

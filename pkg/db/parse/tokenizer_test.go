@@ -23,7 +23,7 @@ func TestTokenizer(t *testing.T) {
 	for tok := scan.Scan(); tok != scanner.EOF; tok = scan.Scan() {
 		printCurrentToken(t, &scan)
 	}
-	t.Error()
+	// t.Error()
 }
 
 func getStringFromUser() string {

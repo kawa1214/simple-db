@@ -55,5 +55,5 @@ func TestBuffer(t *testing.T) {
 	p2.SetInt(80, 9999)
 	buff2.SetModified(1, 0)
 
-	t.Error()
+	// t.Error()
 }

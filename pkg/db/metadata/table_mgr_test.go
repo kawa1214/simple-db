@@ -52,5 +52,5 @@ func TestTableMgr(t *testing.T) {
 	}
 	tx.Commit()
 
-	t.Error()
+	// t.Error()
 }

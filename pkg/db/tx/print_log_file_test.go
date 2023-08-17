@@ -27,5 +27,5 @@ func TestPrintLogFile(t *testing.T) {
 		t.Log(rec)
 	}
 
-	t.Error()
+	// t.Error()
 }

@@ -25,7 +25,7 @@ func TestString(t *testing.T) {
 	}
 }
 
-func TestNew(t *testing.T) {
+func TestNewBlockId(t *testing.T) {
 	b := NewBlockID("a", 1)
 	if b.filename != "a" {
 		t.Errorf("b.FileName() should be a")

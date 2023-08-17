@@ -43,7 +43,7 @@ func (rr *RollbackRecord) String() string {
 // This log record contains the ROLLBACK operator, followed by the transaction id.
 func RollbackRecordWriteToLog(lm *log.LogMgr, txnum int) int {
 	rec := make([]byte, 8) // 8 bytes for two integers in Go
-	p := file.NewLogPage(rec)
+	p := file.NewPageFromBytes(rec)
 	p.SetInt(0, ROLLBACK)
 	p.SetInt(4, txnum) // set at position 4 as integer occupies 4 bytes
 	return lm.Append(rec)

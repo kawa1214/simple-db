@@ -39,7 +39,7 @@ func (sr *StartRecord) String() string {
 // WriteToLog writes a start record to the log.
 func StartRecordWriteToLog(lm *log.LogMgr, txnum int) int {
 	rec := make([]byte, 2*4)
-	p := file.NewLogPage(rec)
+	p := file.NewPageFromBytes(rec)
 	p.SetInt(0, START)
 	p.SetInt(4, txnum)
 	return lm.Append(rec)

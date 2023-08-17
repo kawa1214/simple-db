@@ -18,7 +18,7 @@ const (
 )
 
 func CreateLogRecord(bytes []byte) LogRecord {
-	p := file.NewLogPage(bytes) // Assuming you have a corresponding NewPage function
+	p := file.NewPageFromBytes(bytes) // Assuming you have a corresponding NewPage function
 	switch p.GetInt(0) {
 	case CHECKPOINT:
 		return NewCheckpointRecord()
