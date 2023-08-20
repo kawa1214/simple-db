@@ -1,16 +1,14 @@
-A toy DBMS implementation written in Go.
+package main
 
-## How to run.
-
-```bash
-go run example/main.go
-```
-
-## How to use.
-
-```go
 import (
+	"database/sql"
+	"fmt"
+	"log"
+	"math"
+	"math/rand"
+
 	_ "github.com/kawa1214/simple-db/pkg/db/driver"
+	"github.com/kawa1214/simple-db/pkg/util"
 )
 
 func main() {
@@ -37,7 +35,7 @@ func main() {
 	if err != nil {
 		log.Panic(err)
 	}
-    rows.Close()
+	defer rows.Close()
 
 	fields, err := rows.Columns()
 	if err != nil {
@@ -50,8 +48,3 @@ func main() {
 		log.Print(b)
 	}
 }
-```
-
-## Requirements
-
-- go1.20
